@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Date & Time & Age</h2>
+
+<p id="date"></p>
+
+<p id="time"></p>
+
+<input type="date" id="birthday" oninput="age(this)" placeholder="mm/dd/yyyy">
+
+<p id="age"></p>
+
+<script>
+function date() {
+  var dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  var monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  var date = new Date();
+
+  var dayNumber = date.getDay();
+  var dayDate = date.getDate();
+  var monthNumber = date.getMonth() + 1;
+  var year = date.getFullYear();
+  
+  var format = dayDate + " / " + monthNumber + " / " + year + "<br>" + 
+dayName[dayNumber] + " / " + monthName[monthNumber-1] + " / " + year;
+
+  document.getElementById("date").innerHTML = format;
+} date();
+
+/* ============================ */
+function time() {
+  var now = new Date();
+  var hour = now.getHours(); 
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+  var time = minute + " : " + second;
+  
+  if(hour == 0) {
+    hour = 12;
+    date();
+  } 
+
+  if(hour > 12) {
+    hour -= 12;
+    time += " pm"
+  } else {
+    time += " am";
+  }
+  
+  time = hour + " : " + time;
+    
+  document.getElementById("time").innerHTML = 
+  "Hour / Minute / Second <br>" + time;
+} time();
+setInterval(time, 1000);
+
+/* ============================ */
+function age(x) {
+  var date = new Date();
+  var input = new Date(x.value);
+          
+  var year = date.getFullYear() - input.getFullYear();
+  var month = date.getMonth() - input.getMonth();
+  var day = date.getDate() - input.getDate();
+
+  document.getElementById('age').textContent = 
+  `You're old by ${year} years, ${month} months and ${day} days.`;
+} 
+</script>
+
+</body>
+</html>
